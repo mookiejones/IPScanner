@@ -1,0 +1,58 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                  x:Class="IPScanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:IPScanner"
+        xmlns:vm="clr-namespace:IPScanner.ViewModels"
+        mc:Ignorable="d"
+        Title="IP Scanner" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel},IsDesignTimeCreatable=True}"
+        >
+    <DockPanel Margin="16">
+        
+    <Grid   DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding To,Mode=TwoWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}" wpf:HintAssist.Hint="To" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <TextBox Grid.Column="1" Text="{Binding From,Mode=TwoWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}" wpf:HintAssist.Hint="From" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <ComboBox Grid.Row="1" ItemsSource="{Binding NetworkInterfaces}" SelectedValue="{Binding SelectedInterface}" wpf:ComboBoxAssist.ShowSelectedItem="True" wpf:HintAssist.Hint="Network Interface" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+
+
+
+            <TextBox Grid.Row="2" Text="{Binding Host,Mode=TwoWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}" wpf:HintAssist.Hint="Host" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Button Content="Use" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Command="{Binding UseCommand,Mode=OneWay}"/>
+
+
+            <Button Grid.Row="3" Content="Start" Grid.ColumnSpan="2" Margin="0,8" Command="{Binding StartCommand,Mode=OneWay}" HorizontalAlignment="Center"/>
+            <ListBox Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding Results}">
+                <ListBox.ContextMenu>
+                    <ContextMenu >
+                        <MenuItem Command="{Binding ClearResultsCommand,Mode=OneWay}">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <wpf:PackIcon Kind="Clear"/>
+                                    <TextBlock Text="Clear"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+
+        </Grid>
+    </DockPanel>
+
+</mah:MetroWindow>
