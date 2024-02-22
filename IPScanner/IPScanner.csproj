@@ -20,4 +20,12 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\admin\Source\Repos\IPScanner\IPScanner\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\admin\Source\Repos\IPScanner\IPScanner\.editorconfig" />
+  </ItemGroup>
+
 </Project>
